@@ -4,4 +4,6 @@
     <string name="go_to_stocks">Go to Stocks</string>
     <string name="stocks_details">Stock Details</string>
     <string name="no_data">No Data</string>
+    <string name="sid_title">Sid title</string>
+    <string name="sid_price">Sid Price</string>
 </resources>

@@ -1,11 +1,14 @@
 package com.vs.adapters
 
-import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import com.vs.R
 import com.vs.models.Datum
+import com.vs.utils.C
+import com.vs.views.fragments.HistoryFragment
 
 import kotlinx.android.synthetic.main.layout_note_item.view.*
 import java.util.ArrayList
@@ -36,26 +39,22 @@ class StocksAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<StocksAd
 
     inner class ViewHolder(itemView: View) :
             androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
-        private val tvNoteTitle = itemView.tvNoteTitle!!
+        private val tvNoteTitle = itemView.tvSidTitle!!
         private val tvNoteDesc = itemView.tvNoteDesc!!
-        private val cvNoteItemContainer = itemView.cvNoteItemContainer!!
+        private val cvStockItemContainer = itemView.cvStockItemContainer!!
+        private val ivStatus = itemView.ivStatus!!
 
         fun bindToView(data: Datum) {
             tvNoteTitle.text = data.sid
             tvNoteDesc.text = data.price.toString()
+            if(data.change>0){
+                ivStatus.setImageDrawable(
+                    ContextCompat.getDrawable(itemView.context, R.drawable.ic_up))
+            }else{
+                ivStatus.setImageDrawable(
+                    ContextCompat.getDrawable(itemView.context, R.drawable.ic_down))
+            }
+
         }
     }
-
-//    private fun goToNoteDetailsScreen(note: Note) {
-//        val noteDetailsFragment = NoteDetailsFragment()
-//        val bundle = Bundle()
-//        bundle.putSerializable(C.NOTE, note)
-//        noteDetailsFragment.arguments = bundle
-//
-//        (context as HomeActivity).also {
-//            it.supportFragmentManager.beginTransaction()
-//                .add(R.id.rlContainer, noteDetailsFragment, C.NOTE_DETAILS).addToBackStack("NoteDetailsFragment")
-//                .commitAllowingStateLoss()
-//        }
-//    }
 }

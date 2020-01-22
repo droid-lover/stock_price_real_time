@@ -6,5 +6,6 @@ package com.vs.utils
 class C {
     companion object {
         val ENGLISH ="en-US"
+        val STOCK_DATA="stock_data"
     }
 }

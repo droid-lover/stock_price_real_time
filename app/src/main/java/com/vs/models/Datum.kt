@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 /**
  * Created By Sachin
@@ -37,7 +38,7 @@ data class Datum(
         @SerializedName("date")
         var date: String? = null
 
-) {
+):Serializable {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
 }
