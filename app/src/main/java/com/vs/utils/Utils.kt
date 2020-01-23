@@ -13,7 +13,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.vs.R
 import com.vs.app.StockApp
+import java.text.DecimalFormat
+import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.absoluteValue
 
 /**
  * Created by Sachin
@@ -45,7 +48,7 @@ object Utils {
             if (alertDialog == null) {
                 val builder = AlertDialog.Builder(context)
                 val view = LayoutInflater.from(context)
-                        .inflate(R.layout.layout_processing_dialog, null, false)
+                    .inflate(R.layout.layout_processing_dialog, null, false)
                 (view.findViewById<View>(R.id.tv_processing_message) as TextView).text = message
                 builder.setView(view)
                 alertDialog = builder.create()
@@ -80,9 +83,15 @@ object Utils {
         }
     }
 
-    fun getTime(): String {
-        return Calendar.getInstance().time.toString()
+    fun getDate(timestamp: Long): String {
+        val simpleDateFormat = SimpleDateFormat("HH:MM:SS")
+        val dateValue = Date(timestamp)
+        return simpleDateFormat.format(dateValue)
+
     }
 
+    fun priceFormatter(price: Double): String {
+        return DecimalFormat("##0.##").format(price.absoluteValue)
+    }
 
 }

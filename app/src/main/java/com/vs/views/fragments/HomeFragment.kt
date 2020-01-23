@@ -45,7 +45,7 @@ class HomeFragment : Fragment() {
     private fun setStocksList() {
         activity?.also {
             activity?.also { context ->
-                stocksAdapter = StocksAdapter()
+                stocksAdapter = StocksAdapter(context)
                 rvStocks?.apply {
                     layoutManager = LinearLayoutManager(context)
                     adapter = stocksAdapter

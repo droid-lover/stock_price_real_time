@@ -1,6 +1,8 @@
 package com.vs.adapters
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +10,7 @@ import androidx.core.content.ContextCompat
 import com.vs.R
 import com.vs.models.Datum
 import com.vs.utils.C
+import com.vs.views.activities.HomeActivity
 import com.vs.views.fragments.HistoryFragment
 
 import kotlinx.android.synthetic.main.layout_note_item.view.*
@@ -17,7 +20,7 @@ import java.util.ArrayList
 /**
  *  Created by Sachin
  */
-class StocksAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<StocksAdapter.ViewHolder>() {
+class StocksAdapter(private val context:Context) : androidx.recyclerview.widget.RecyclerView.Adapter<StocksAdapter.ViewHolder>() {
     private var data: List<Datum> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -55,6 +58,22 @@ class StocksAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<StocksAd
                     ContextCompat.getDrawable(itemView.context, R.drawable.ic_down))
             }
 
+            cvStockItemContainer.setOnClickListener {
+                goToStockDetailsScreen(data)
+            }
+        }
+    }
+
+    private fun goToStockDetailsScreen(data: Datum) {
+        val historyFragment = HistoryFragment()
+        val bundle = Bundle()
+        bundle.putSerializable(C.STOCK_DATA, data)
+        historyFragment.arguments = bundle
+
+        (context as HomeActivity).also {
+            it.supportFragmentManager.beginTransaction()
+                .replace(R.id.rlContainer, historyFragment, C.STOCK_DATA).addToBackStack("HistoryFragment")
+                .commitAllowingStateLoss()
         }
     }
 }
